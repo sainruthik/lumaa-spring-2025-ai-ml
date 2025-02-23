@@ -1,91 +1,95 @@
-# AI/Machine Learning Intern Challenge: Simple Content-Based Recommendation
+# Movie Recommendation System
 
-**Deadline**: Sunday, Feb 23th 11:59 pm PST
+## How to Run the Model
 
----
+Follow these steps to set up and run the recommendation system:
 
-## Overview
+### Prerequisites
 
-Build a **content-based recommendation system** that, given a **short text description** of a user’s preferences, suggests **similar items** (e.g., movies) from a small dataset. This challenge should take about **3 hours**, so keep your solution **simple** yet **functional**.
+- Ensure you have **Git** and **Conda** installed on your system.
+- Python dependencies are listed in `requirements.txt`.
 
-### Example Use Case
+### Steps to Run:
 
-- The user inputs:  
-  *"I love thrilling action movies set in space, with a comedic twist."*  
-- Your system processes this description (query) and compares it to a dataset of items (e.g., movies with their plot summaries or keywords).  
-- You then return the **top 3–5 “closest” matches** to the user.
+1. **Clone the repository**
 
----
+   ```sh
+   git clone <repository_url>
+   ```
 
-## Requirements
+2. **Navigate to the project folder**
 
-1. **Dataset**  
-   - Use a **small** public dataset of items (e.g., a list of movies with plot summaries, or other textual descriptions).  
-   - Make sure the dataset is easy to handle (maybe 100–500 rows) so the solution remains quick to implement and run.  
-   - Include the dataset in your forked repository *or* provide instructions/link on how to download it.  
+   ```sh
+   cd <repository_name>
+   ```
 
-2. **Approach**  
-   - **Content-Based**: At a minimum, use text similarity to recommend items.  
-     - For instance, you can transform both the user’s text input and each item’s description into TF-IDF vectors and compute **cosine similarity**.  
-   - Return the **top N** similar items (e.g., top 5).
+3. **Open a Command Prompt in the project folder**
 
-3. **Code Organization**  
-   - You may use a **Jupyter Notebook** or **Python scripts**.  
-   - Keep it **readable** and **modular** (e.g., one section for loading data, one for building vectors, one for computing similarity, etc.).  
-   - Briefly comment or docstring your key functions/sections.
+4. **Create a Conda virtual environment**
 
-4. **Output**  
-   - When given an input description (e.g., `"I like action movies set in space"`), your system should print or return a list of recommended items (e.g., 3–5 titles).  
-   - Include the similarity score or rank if you’d like.
+   ```sh
+   conda create -p env python=3.8 -y
+   ```
 
-5. **Summary & Instructions**  
-   - A short `README.md` that includes:
-     - **Dataset**: Where it’s from, any steps to load it.  
-     - **Setup**: Python version, virtual environment instructions, and how to install dependencies (`pip install -r requirements.txt`).  
-     - **Running**: How to run your code (e.g., `python recommend.py "Some user description"` or open your notebook in Jupyter).  
-     - **Results**: A brief example of your system’s output for a sample query.
+5. **Activate the virtual environment**
 
----
+   ```sh
+   conda activate ./env
+   ```
 
-## Deliverables
+6. **Install dependencies**
 
-1. **Fork the Public Repository**  
-   - **Fork** this repo into your own GitHub account.
+   ```sh
+   pip install -r requirements.txt
+   ```
 
-2. **Implement Your Solution**  
-   - Load and preprocess your dataset (e.g., read CSV, handle text columns).  
-   - Convert text data to vectors (e.g., TF-IDF).  
-   - Implement a function to compute similarity between the user’s query and each item’s description.  
-   - Return the top matches.
-   - Salary expectation per month (Mandatory)
+7. **Run the recommendation script**
 
-3. **Short Video Demo**  
-   - In a `.md` file (e.g., `demo.md`) within your fork, paste a link to a **brief screen recording** (video link).  
-   - Demonstrate:
-     - How you run the recommendation code.  
-     - A sample query and the results.
+   ```sh
+   python Recommendation.py
+   ```
 
-4. **Deadline**  
-   - Submit your fork by **Sunday, Feb 23th 11:59 pm PST**.
+8. **First-time execution behavior**
 
-> **Note**: This should be doable within ~3 hours. Keep it **straightforward**—you do **not** need advanced neural networks or complex pipelines. A simple TF-IDF + cosine similarity approach is sufficient.
+   - If the model does not exist, it will be created.
+   - If the model already exists, the next step happens directly.
 
----
+9. **User prompt interaction**
 
-## Evaluation Criteria
+   - The system will print:
+     ```
+     "Which kind of movies do you want to watch today?
+     Enter 'exit' to stop recommendations."
+     ```
 
-1. **Functionality**  
-   - Does your code run without errors?  
-   - When given an input query, does it successfully output relevant items?
+10. **Input your movie preference**
 
-2. **Code Quality**  
-   - Clear, commented code (where it counts).  
-   - Logical steps (load data → transform → recommend).
+    - Enter the genre or movie name to get recommendations.
 
-3. **Clarity**  
-   - Is your `README.md` straightforward about setup, how to run, and what to expect?
+11. **Repeat until exit**
 
-4. **ML/Recommendation Understanding**  
-   - Basic implementation of a content-based recommendation approach (vectorization, similarity measure).
+    - The process continues until you type:
+      ```
+      exit
+      ```
 
-**We look forward to seeing your solution!** Good luck!
+### Project Structure and Code Explanation
+
+- `Data/raw/movies.csv`: Contains raw movie data used for training and recommendations. The dataset was sourced from [Kaggle - Millions of Movies](https://www.kaggle.com/datasets/akshaypawar7/millions-of-movies).
+- `src/preprocessing.py`: Processes the dataset by cleaning missing values, filtering English movies, and creating a text-based plot representation with stemming for recommendation.
+- `src/Create_model.py`: Loads preprocessing and training parameters from `params.yaml`, runs data preprocessing, and calls the training module to build and store the model.
+- `src/Train.py`: Trains multiple TF-IDF models with various hyperparameters from `params.yaml`, selects the best model based on cosine similarity, and saves the trained model and TF-IDF matrix.
+- `Recommendation.py`: Loads the trained model and dataset, accepts user input, preprocesses text, finds similar movie titles, and computes cosine similarity scores to suggest relevant movies.
+- `best_params.yaml`: Stores the best hyperparameters found during training.
+- `params.yaml`: Configuration file specifying paths for raw and processed data, model storage, TF-IDF settings, stop words, tokenization patterns, and example movie-related input queries.
+- `requirements.txt`: Lists required Python dependencies.
+
+### Notes
+
+- Ensure all dependencies are installed correctly.
+- If you face any issues, check the error messages and verify that Conda and Python are set up properly.
+
+Enjoy your movie recommendations!
+
+### Salary Expectations
+- 25-30$/hr

@@ -1,0 +1,56 @@
+preprocess:
+  input: Data/raw/movies.csv
+  output: Data/processed/movies.csv
+
+train:
+  data: Data/processed/movies.csv
+  model: models/model.pkl
+  stop_words: 'english'
+  max_features_values: [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000]
+  min_df_values: [1, 2, 3, 5]
+  token_pattern: "(?u)\\b\\w+\\b"
+  input_statements : [
+      # Movie Titles (User may enter specific movie names)
+      "Inception",
+      "Titanic",
+      "The Conjuring",
+      "The Matrix",
+      "Avengers: Endgame",
+      "Interstellar",
+      "The Dark Knight",
+      "Parasite",
+      "Jurassic Park",
+      "The Godfather",
+
+      # Genres (User may enter broad categories)
+      "Science Fiction",
+      "Horror",
+      "Romantic Comedy",
+      "Action Thriller",
+      "Fantasy Adventure",
+      "Crime Drama",
+      "Superhero",
+      "War Film",
+      "Dystopian Future",
+      "Animated Family Movie",
+
+      # Detailed Plot Descriptions
+      "A futuristic adventure where a hero must navigate an advanced, high-tech world to save humanity.",
+      "A terrifying horror film featuring haunted houses, vengeful spirits, and dark supernatural forces.",
+      "A deeply emotional drama that explores love, loss, and the struggles of human relationships.",
+      "A thrilling action-packed movie with high-speed car chases, explosions, and intense combat.",
+      "A science fiction epic about astronauts exploring distant galaxies and encountering alien civilizations.",
+      "A gripping crime thriller involving an intense detective investigation and a shocking plot twist.",
+      "A magical fantasy film with ancient kingdoms, mythical creatures, and a hero on a legendary quest.",
+      "A romantic comedy where two unlikely people meet under unusual circumstances and fall in love.",
+      "A war drama that portrays the bravery of soldiers on the battlefield and the sacrifices they make.",
+      "A dystopian future where society is controlled by a totalitarian government, and rebels fight for freedom."
+  ]
+
+
+  tfidf_matrix: models/tfidf_matrix.npz
+
+Recommandation:
+  model_path: models/model.pkl
+  data: Data/processed/movies.csv
+  tfidf_matrix: models/tfidf_matrix.npz
