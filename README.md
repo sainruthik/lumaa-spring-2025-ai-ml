@@ -14,13 +14,13 @@ Follow these steps to set up and run the recommendation system:
 1. **Clone the repository**
 
    ```sh
-   git clone <repository_url>
+   git clone https://github.com/sainruthik/lumaa-spring-2025-ai-ml.git
    ```
 
 2. **Navigate to the project folder**
 
    ```sh
-   cd <repository_name>
+   cd lumaa-spring-2025-ai-ml
    ```
 
 3. **Open a Command Prompt in the project folder**
