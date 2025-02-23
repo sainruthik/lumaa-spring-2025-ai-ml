@@ -64,7 +64,7 @@ Follow these steps to set up and run the recommendation system:
 
 10. **Input your movie preference**
 
-    - Enter the genre or movie name to get recommendations.
+    - Enter the genre, movie name or movie statement to get recommendations.
 
 11. **Repeat until exit**
 
