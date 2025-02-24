@@ -32,7 +32,7 @@ def preprocess(input_path, output_path):
     - Filtering only English-language movies.
     - Reducing dataset size to 500 rows.
     - Selecting relevant columns.
-    - Creating a combined "Plot" column for text-based analysis.
+    - Creating a weighted "Plot" column for text-based analysis.
     - Applying stemming to the plot text.
     - Saving the cleaned dataset to a new file.
 
@@ -64,11 +64,21 @@ def preprocess(input_path, output_path):
         # Fill NaN values with empty strings before concatenation
         data.fillna("", inplace=True)
 
-        # Create a new "Plot" column by combining relevant textual data
-        data["Plot"] = data["overview"] + " " + data["keywords"] + " " + data["genres"] + " " + data["title"]
+        # Assign feature weights
+        weights = {
+            "overview": 0.5,
+            "keywords": 0.3,
+            "genres": 0.2,
+            "title": 0.1
+        }
 
-        # Retain only necessary columns for further processing
-        data = data[["id", "title", "genres", "vote_average", "Plot"]]
+        # Create a weighted "Plot" column
+        data["Plot"] = (
+            (data["overview"] + " ") * int(weights["overview"] * 10) +
+            (data["keywords"] + " ") * int(weights["keywords"] * 10) +
+            (data["genres"] + " ") * int(weights["genres"] * 10) +
+            (data["title"] + " ") * int(weights["title"] * 10)
+        )
 
         # Apply text preprocessing (stemming)
         data["Plot"] = data["Plot"].astype(str).apply(preprocess_text)
