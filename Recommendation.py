@@ -83,7 +83,8 @@ def recommend_movies(input_text, vectorizer, tfidf_matrix, data, top_n=5):
     
     # If no similarity is found, refine the query using title-based matches
     if max(similarity_scores) == 0 and not title_matches.empty:
-        refined_query = " ".join(title_matches["title"] + " " + title_matches["Plot"] + " " + title_matches["genres"])
+        
+        refined_query = " ".join(title_matches["Plot"])
         input_vector = vectorizer.transform([refined_query])
         similarity_scores = cosine_similarity(input_vector, tfidf_matrix).flatten()
         title_matches.drop(columns=["Plot"], inplace=True)
