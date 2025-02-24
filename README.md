@@ -51,7 +51,7 @@ Follow these steps to set up and run the recommendation system:
 
 8. **First-time execution behavior**
 
-   - If the model does not exist, it will be created.
+   - If the model does not exist, it will be created and then next step happens.
    - If the model already exists, the next step happens directly.
 
 9. **User prompt interaction**
@@ -81,7 +81,7 @@ Follow these steps to set up and run the recommendation system:
 - `src/Train.py`: Trains multiple TF-IDF models with various hyperparameters from `params.yaml`, selects the best model based on cosine similarity, and saves the trained model and TF-IDF matrix.
 - `Recommendation.py`: Loads the trained model and dataset, accepts user input, preprocesses text, finds similar movie titles, and computes cosine similarity scores to suggest relevant movies.
 - `best_params.yaml`: Stores the best hyperparameters found during training.
-- `params.yaml`: Configuration file specifying paths for raw and processed data, model storage, TF-IDF settings, stop words, tokenization patterns, and example movie-related input queries.
+- `params.yaml`: Configuration file specifying paths for raw and processed data, model storage, TF-IDF settings, stop words, tokenization patterns, and example movie-related input queries. This file was created for easy access to enter hyperparameters and change the model, data location or model, data itself.
 - `requirements.txt`: Lists required Python dependencies.
 
 ### Notes
